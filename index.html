@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Verificador de Fake News</title>
+</head>
+<body>
+  <h1>Verificador de Fake News</h1>
+
+  <input type="text" id="texto" placeholder="Ex: A Terra é plana?">
+  <button onclick="verificar()">Verificar</button>
+
+  <div id="resultados"></div>
+
+  <script>
+    async function verificar() {
+      const query = document.getElementById("texto").value.trim();
+      const resultadosDiv = document.getElementById("resultados");
+
+      if (!query) {
+        resultadosDiv.innerHTML = "<p>⚠ Digite algo para verificar.</p>";
+        return;
+      }
+
+      resultadosDiv.innerHTML = "<p>Carregando...</p>";
+
+      try {
+        const resposta = await fetch(`http://localhost:5000/verificar?q=${encodeURIComponent(query)}`);
+        const dados = await resposta.json();
+
+        if (!dados.claims || dados.claims.length === 0) {
+          resultadosDiv.innerHTML = "<p>⚠ Nenhuma checagem encontrada.</p>";
+          return;
+        }
+
+        let html = "<h2>Resultados encontrados:</h2>";
+        dados.claims.forEach(c => {
+          if (c.claimReview && c.claimReview.length > 0) {
+            html += `
+              <div style="border-bottom:1px solid #ddd; margin-bottom:10px; padding-bottom:10px;">
+                <p><strong>Afirmação:</strong> ${c.text}</p>
+                <p><strong>Classificação:</strong> ${c.claimReview[0].textualRating}</p>
+                <p><strong>Fonte:</strong> <a href="${c.claimReview[0].url}" target="_blank">${c.claimReview[0].publisher.name}</a></p>
+              </div>
+            `;
+          }
+        });
+
+        resultadosDiv.innerHTML = html;
+      } catch (erro) {
+        resultadosDiv.innerHTML = "<p>❌ Erro ao buscar resultados.</p>";
+        console.error(erro);
+      }
+    }
+  </script>
+</body>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+  }
+
+  input[type="text"] {
+    width: 60%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #2980b9;
+  }
+
+  #resultados {
+    margin-top: 30px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #resultados h2 {
+    color: #34495e;
+    margin-bottom: 20px;
+  }
+
+  #resultados div {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+  }
+
+  #resultados p {
+    margin: 5px 0;
+  }
+
+  a {
+    color: #3498db;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  p.warning {
+    color: #e67e22;
+    font-weight: bold;
+  }
+
+  p.error {
+    color: #e74c3c;
+    font-weight: bold;
+  }
+</style>
+
+</html>
