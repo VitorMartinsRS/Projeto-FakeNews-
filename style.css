@@ -1,49 +1,147 @@
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
+/* Reset geral */
+* {
+  box-sizing: border-box;
   margin: 0;
-  padding: 20px;
+  padding: 0;
 }
 
+/* Título dentro do card */
 h1 {
   text-align: center;
-  color: #2c3e50;
-  margin-bottom: 30px;
+  font-size: 48px;
+  font-family: 'Tektur', sans-serif;
+  color:  #1a2a6c; 
+  text-shadow: 2px 4px 6px #53d5dec7, 0 0 10px #40f636c2;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
 }
 
+#nomesite{
+color: #fff;
+}
+
+#como-funciona{
+text-align: center;
+font-family: 'Outfit', sans-serif;
+font-size: 18px;
+color:  #1a2a6c; 
+}
+
+/* Body e fundo animado */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Outfit', sans-serif;
+  background-size: 600% 600%;
+  background: linear-gradient(270deg, #1a2a6c, #00f0ff, #062fe4);
+  animation: gradientShift 20s ease infinite;
+}
+
+/* Animação do gradiente */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Header do topo */
+header {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px; /* mais espaço pro card */
+}
+
+h2, h3 {
+  padding-top: 15px;
+  color: #1a2a6c; 
+  font-family: 'Outfit', sans-serif;
+  margin: 3px;
+   text-shadow: 0 0 10px  #53d5dea2;
+}
+
+/* Card principal */
+.topnav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  width: 600px;
+  background-color: #ffffffab;
+  border: 4px solid #333;
+  border-radius: 8px;
+  box-shadow: inset 0 0 15px #062fe498;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Glow ao passar o mouse */
+.topnav:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 50px #062fe498, 0 0 25px #0095ff;
+}
+
+
+/* Linha neon separando título do input */
+.topnav hr {
+  width: 80%;
+  border: none;
+  height: 2px;
+  background: #00f0ff;
+  box-shadow: 0 0 10px #00f0ff;
+  margin: 20px 0;
+}
+
+/* Input de texto */
 input[type="text"] {
-  width: 60%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  width: 350px;
+  padding: 12px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-family: 'Outfit', sans-serif;
   font-size: 16px;
-  display: inline-block;
   margin-right: 10px;
+  transition: border-color 0.3s ease;
 }
 
+input[type="text"]:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+/* Botão */
 button {
-  padding: 10px 20px;
+  font-size: 16px;
+  font-family: 'Outfit', sans-serif;
+  padding: 12px 20px;
   background-color: #3498db;
   color: white;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
+  width: 220px;
+  margin-top: 20px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #2980b9;
+  background-color: #186091;
+  box-shadow: 0 0 10px #186091;
 }
 
+/* Div de resultados */
 #resultados {
-  margin-top: 30px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  margin-top: 20px;
   max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  background-color: #e6f7ff;
+  border-left: 5px solid #3498db;
+  border-radius: 8px;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
 }
 
+/* Resultados individuais */
 #resultados h2 {
   color: #34495e;
   margin-bottom: 20px;
@@ -55,21 +153,14 @@ button:hover {
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   margin-bottom: 15px;
+  transition: transform 0.3s ease;
 }
 
-#resultados p {
-  margin: 5px 0;
+#resultados div:hover {
+  transform: translateX(5px);
 }
 
-a {
-  color: #3498db;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
+/* Mensagens */
 p.warning {
   color: #e67e22;
   font-weight: bold;
@@ -78,4 +169,14 @@ p.warning {
 p.error {
   color: #e74c3c;
   font-weight: bold;
+}
+
+/* Links */
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }

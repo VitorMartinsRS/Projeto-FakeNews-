@@ -1,18 +1,29 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Verificador de Fake News</title>
-  <link rel="stylesheet" href="style.css"> <!-- CSS separado -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../imagens/simbolo.png">
+    <link rel="stylesheet" href="style.css">
+    <title>Verificador</title>
 </head>
+<header>
+  <h1 id="nomesite">Verify</h1>
+  <h2>Como funciona?</h2>
+  <pre id="como-funciona">O verificador utiliza técnicas de processamento
+     de linguagem natural e aprendizado 
+     de máquina para analisar 
+     o texto e determinar sua veracidade.</pre>
+  <h2>Saiba se a notícia é verdadeira ou falsa!</h2>
+  <h3>Utilize nosso verificador para checar a veracidade das informações.</h3>
+</header>
 <body>
-  <h1>Verificador de Fake News</h1>
-
+  <div class="topnav">
+    <h1>Verificador de <br> Fake News</h1>
   <input type="text" id="texto" placeholder="Ex: A Terra é plana?">
-  <button onclick="verificar()">Verificar</button>
-
-  <div id="resultados"></div>
-
-  <script src="script.js"></script> <!-- JavaScript separado -->
-</body>
+ <button onclick="verificar()">Verificar</button>
+   <div id="resultados"></div>
+  </div>
+ </body>
+<script src="script.js"></script>
 </html>
