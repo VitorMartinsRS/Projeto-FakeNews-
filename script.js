@@ -1,4 +1,4 @@
-async function verificar() {
+    async function verificar() {
   const query = document.getElementById("texto").value.trim();
   const resultadosDiv = document.getElementById("resultados");
 
